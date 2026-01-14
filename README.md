@@ -1,8 +1,6 @@
 # Training Request Test – ICON SOFTWARE
 
 ## Contexte
-Ce projet correspond au test technique proposé par ICON SOFTWARE pour le poste de Développeur Full Stack Junior.
-
 Un employé soumet des demandes de formation. Le système décide automatiquement si chaque demande est :
 
 - **APPROVED** : budget et jours disponibles suffisants  
@@ -57,7 +55,7 @@ training-request-test/
 
 ## Exécution
 
-### Option 1 – Avec VS Code (recommandée)
+### Option 1 – Avec VS Code 
 
 1. Cloner le dépôt :  
 ```bash
