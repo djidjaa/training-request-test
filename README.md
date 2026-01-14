@@ -19,7 +19,7 @@ training-request-test/
 │ ├── model/ # Contient la classe TrainingRequest
 │ ├── service/ # Contient la logique de traitement des demandes
 │ └── Main.java # Point d'entrée du programme
-├── target/ # Fichiers compilés (à ignorer dans Git)
+├── target/ # Fichiers compilés
 ├── pom.xml # Gestionnaire de dépendances Maven
 └── README.md
    ```
@@ -33,6 +33,31 @@ training-request-test/
    - Vérifier si le budget restant et le quota de jours permettent l’approbation.  
    - Mettre à jour le statut : `APPROVED`, `REJECTED_BUDGET`, `REJECTED_DAYS` ou `PENDING`.  
 3. Après approbation, **mettre à jour le budget et les jours restants** de l’employé.  
+
+---
+
+## Exemple
+
+### Données initiales
+- Budget annuel : 1000 €
+- Quota annuel : 10 jours
+- Demandes :
+
+| Date       | Cost | Days |
+|------------|------|------|
+| 01/01/2025 | 500  | 5    |
+| 05/01/2025 | 600  | 4    |
+| 10/01/2025 | 200  | 4    |
+| 15/01/2025 | 100  | 2    |
+
+### Résultat attendu
+
+| Date       | Cost | Days | Status         |
+|------------|------|------|----------------|
+| 01/01/2025 | 500  | 5    | APPROVED       |
+| 05/01/2025 | 600  | 4    | REJECTED_BUDGET|
+| 10/01/2025 | 200  | 4    | APPROVED       |
+| 15/01/2025 | 100  | 2    | REJECTED_DAYS  |
 
 ---
 
