@@ -1,78 +1,87 @@
-# Test Technique – Développeur Full Stack Junior
+# Training Request Test – ICON SOFTWARE
 
 ## Contexte
+Ce projet correspond au test technique proposé par ICON SOFTWARE pour le poste de Développeur Full Stack Junior.
 
-Un employé peut soumettre des demandes de formation.  
-Le système décide automatiquement si chaque demande est **APPROVED**, **REJECTED_BUDGET**, **REJECTED_DAYS**, ou **PENDING**, selon :
+Un employé soumet des demandes de formation. Le système décide automatiquement si chaque demande est :
 
-- Le **budget annuel** disponible pour l’employé
-- Le **quota annuel de jours** maximum (20 jours)
+- **APPROVED** : budget et jours disponibles suffisants  
+- **REJECTED_BUDGET** : budget insuffisant  
+- **REJECTED_DAYS** : quota de jours dépassé  
+- **PENDING** : en attente de traitement  
 
-Les demandes sont traitées **dans l’ordre chronologique** (la plus ancienne en premier).
+Les demandes sont traitées dans **l’ordre chronologique** (la plus ancienne en premier).
+
+---
+## Structure du projet
+```bash
+training-request-test/
+├── src/
+│ └── main/java/com/iconsoftware/training/
+│ ├── model/ # Contient la classe TrainingRequest
+│ ├── service/ # Contient la logique de traitement des demandes
+│ └── Main.java # Point d'entrée du programme
+├── target/ # Fichiers compilés (à ignorer dans Git)
+├── pom.xml # Gestionnaire de dépendances Maven
+└── README.md
+   ```
 
 ---
 
-## Logique métier
+## Algorithme et logique métier
 
-1. Trier les demandes par date de création (ancienne → récente)
-2. Pour chaque demande :
-   - Vérifier si le budget restant est suffisant
-   - Vérifier si le nombre de jours restant est suffisant
-   - Si les deux conditions sont remplies :
-     - Statut → **APPROVED**
-     - Mettre à jour le budget et les jours restants
-   - Sinon si budget insuffisant → **REJECTED_BUDGET**
-   - Sinon si jours insuffisants → **REJECTED_DAYS**
-
-> Les demandes rejetées ne consomment **ni budget ni jours**.
+1. **Trier les demandes** par date de création.  
+2. Pour chaque demande :  
+   - Vérifier si le budget restant et le quota de jours permettent l’approbation.  
+   - Mettre à jour le statut : `APPROVED`, `REJECTED_BUDGET`, `REJECTED_DAYS` ou `PENDING`.  
+3. Après approbation, **mettre à jour le budget et les jours restants** de l’employé.  
 
 ---
 
-## Exemple
+## Complexité approximative
 
-### Données initiales
-- Budget annuel : 1000 €
-- Quota annuel : 10 jours
-- Demandes :
-
-| Date       | Cost | Days |
-|------------|------|------|
-| 01/01/2025 | 500  | 5    |
-| 05/01/2025 | 600  | 4    |
-| 10/01/2025 | 200  | 4    |
-| 15/01/2025 | 100  | 2    |
-
-### Résultat attendu
-
-| Date       | Cost | Days | Status         |
-|------------|------|------|----------------|
-| 01/01/2025 | 500  | 5    | APPROVED       |
-| 05/01/2025 | 600  | 4    | REJECTED_BUDGET|
-| 10/01/2025 | 200  | 4    | APPROVED       |
-| 15/01/2025 | 100  | 2    | REJECTED_DAYS  |
-
----
-
-## Complexité
-
-- Tri par date : **O(n log n)**  
-- Parcours des demandes : **O(n)**  
-- **Complexité totale : O(n log n)**
+- Tri des demandes : **O(n log n)**  
+- Parcours et traitement des demandes : **O(n)**  
+- **Total : O(n log n)**
 
 ---
 
 ## Limites et améliorations possibles
 
-- Gestion multi-employés (aujourd’hui le code gère un seul employé)
-- Persistance en base de données (ex: MySQL, MongoDB)
-- Exposition via une API REST (Spring Boot Controller)
-- Tests unitaires pour chaque scénario (JUnit)
+- Gestion d’un seul employé à la fois. Peut être étendu à plusieurs employés.  
+- Pas de persistance en base de données (tout est en mémoire).  
+- Possibilité d’ajouter des validations pour les dates ou les valeurs négatives.  
+- Amélioration possible : priorisation des formations selon le type ou l’urgence.  
 
 ---
 
-## Comment exécuter
+## Exécution
 
-1. Cloner le dépôt
-2. Ouvrir le projet dans **VS Code**
-3. Compiler et exécuter `Main.java`
-4. Les résultats des demandes s’affichent dans la console
+### Option 1 – Avec VS Code (recommandée)
+
+1. Cloner le dépôt :  
+```bash
+git clone https://github.com/djidjaa/training-request-test.git
+   ```
+2. Ouvrir le projet dans VS Code.
+
+3. Ouvrir Main.java et cliquer sur Run ou F5.
+
+4. Les résultats des demandes s’affichent dans la console, avec les statuts APPROVED, REJECTED_BUDGET, REJECTED_DAYS ou PENDING.
+
+### Option 2 – Avec PowerShell / Terminal (sans IDE)
+
+1. Cloner le dépôt :  
+```bash
+git clone https://github.com/djidjaa/training-request-test.git
+cd training-request-test
+   ```
+2. Compiler tous les fichiers Java :
+```bash
+javac -d target/classes src/main/java/com/iconsoftware/training/**/*.java
+   ```
+4. Lancer le programme :
+```bash
+java -cp target/classes com.iconsoftware.training.Main
+   ```
+6. Les résultats des demandes s’affichent dans la console.
