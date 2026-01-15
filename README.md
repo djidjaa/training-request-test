@@ -99,12 +99,12 @@ git clone https://github.com/djidjaa/training-request-test.git
 git clone https://github.com/djidjaa/training-request-test.git
 cd training-request-test
    ```
-2. Compiler tous les fichiers Java :
+2. Compiler les fichiers Java :
 ```bash
-javac -d target/classes src/main/java/com/iconsoftware/training/**/*.java
+javac -d target\classes (Get-ChildItem -Recurse src\main\java\*.java)
    ```
 4. Lancer le programme :
 ```bash
-java -cp target/classes com.iconsoftware.training.Main
+java -cp target\classes com.iconsoftware.training.Main
    ```
 6. Les résultats des demandes s’affichent dans la console.
