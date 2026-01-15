@@ -92,7 +92,7 @@ git clone https://github.com/djidjaa/training-request-test.git
 
 4. Les résultats des demandes s’affichent dans la console, avec les statuts APPROVED, REJECTED_BUDGET, REJECTED_DAYS ou PENDING.
 
-### Option 2 – Avec PowerShell / Terminal (sans IDE)
+### Option 2 – Avec PowerShell 
 
 1. Cloner le dépôt :  
 ```bash
